@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
+from gunicorn import app
+
 from crud import crudEmpleado, crudAdmintrador
 import uuid
 from typing import Optional
@@ -8,6 +10,10 @@ from crud.crudEmpleado import Empleado
 from pydantic import BaseModel
 from typing import List
 
+
+@app.get("/")
+def read_root():
+    return {"message": "API en Vercel funciona!"}
 
 class EmpleadoUpdate(BaseModel):
     telefono: Optional[str] = None
